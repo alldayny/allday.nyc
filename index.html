@@ -8,19 +8,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #0c0c0c;
       --white: #f8f7f4;
       --red: #c0221e;
-      --red-dark: #8f1714;
-      --light: #e8e7e1;
-      --mid: #999;
+      --light: rgba(255,255,255,0.15);
+      --mid: rgba(255,255,255,0.55);
     }
 
     html, body { height: 100%; }
 
     body {
-      background: var(--white);
-      color: var(--black);
+      color: var(--white);
       font-family: 'Arial Black', 'Arial Bold', sans-serif;
       min-height: 100vh;
       display: flex;
@@ -32,18 +29,20 @@
       overflow-x: hidden;
     }
 
-    /* Subtle grid */
-    body::before {
-      content: '';
+    /* Background photo */
+    .bg {
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(var(--light) 1px, transparent 1px),
-        linear-gradient(90deg, var(--light) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.45;
+      background: url('IMG_8845.jpg') center center / cover no-repeat;
       z-index: 0;
-      pointer-events: none;
+    }
+
+    /* Dark overlay for readability */
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
     }
 
     .container {
@@ -56,22 +55,12 @@
       z-index: 1;
     }
 
-    /* Logo */
     .logo {
-      width: 160px;
-      height: 160px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       animation: fadeUp 0.6s ease both;
-    }
-
-    /* Wordmark using uploaded font image */
-    .wordmark-img {
-      width: 100%;
-      max-width: 380px;
-      object-fit: contain;
-      margin-bottom: 32px;
-      animation: fadeUp 0.6s 0.08s ease both;
     }
 
     .links {
@@ -87,16 +76,18 @@
       justify-content: space-between;
       width: 100%;
       padding: 15px 22px;
-      border: 2px solid var(--black);
-      background: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       text-decoration: none;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Arial Black', 'Arial Bold', sans-serif;
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
       animation: fadeUp 0.55s ease both;
       position: relative;
       overflow: hidden;
@@ -106,15 +97,14 @@
       content: '';
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 4px;
+      width: 3px;
       background: var(--red);
       transition: width 0.22s ease;
       z-index: 0;
     }
 
     .link-item:hover::before { width: 100%; }
-    .link-item:hover { color: var(--white); border-color: var(--red); }
-    .link-item:hover .icon { filter: invert(1); }
+    .link-item:hover { border-color: var(--red); color: var(--white); }
     .link-item:hover .arrow { opacity: 1; transform: translate(2px, -2px); }
 
     .link-left {
@@ -128,15 +118,14 @@
     .icon {
       width: 18px;
       height: 18px;
-      opacity: 0.65;
+      opacity: 0.75;
       flex-shrink: 0;
-      transition: filter 0.2s;
     }
 
     .label { position: relative; z-index: 1; }
 
     .arrow {
-      opacity: 0.3;
+      opacity: 0.35;
       font-size: 14px;
       transition: opacity 0.2s, transform 0.2s;
       position: relative;
@@ -185,10 +174,11 @@
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+
   <div class="container">
 
     <img class="logo" src="Final.png" alt="ALLDAYNYC Logo" />
-    <img class="wordmark-img" src="IMG_9171.jpg" alt="ALLDAYNYC" />
 
     <div class="links">
 
