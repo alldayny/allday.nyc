@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALLDAY.NYC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f3;
+      --mid: #888;
+      --border: #e0e0dc;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 14vw, 88px);
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .dot {
+      color: var(--mid);
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--black);
+      margin: 20px 0 32px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 18px 24px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      text-decoration: none;
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .link-item:hover {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .link-item:hover .arrow {
+      opacity: 1;
+    }
+
+    .arrow {
+      opacity: 0.3;
+      font-size: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .link-item:nth-child(1) { animation-delay: 0.15s; }
+    .link-item:nth-child(2) { animation-delay: 0.22s; }
+    .link-item:nth-child(3) { animation-delay: 0.29s; }
+    .link-item:nth-child(4) { animation-delay: 0.36s; }
+    .link-item:nth-child(5) { animation-delay: 0.43s; }
+    .link-item:nth-child(6) { animation-delay: 0.50s; }
+
+    .contact {
+      margin-top: 36px;
+      font-size: 12px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+      animation: fadeUp 0.6s 0.55s ease both;
+    }
+
+    .contact a {
+      color: var(--mid);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact a:hover {
+      color: var(--black);
+      border-bottom-color: var(--black);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wordmark">ALLDAY<span class="dot">.</span>NYC</div>
+    <div class="divider"></div>
+
+    <div class="links">
+      <a class="link-item" href="https://instagram.com/allday.nyc" target="_blank" rel="noopener">
+        Instagram <span class="arrow">↗</span>
+      </a>
+      <a class="link-item" href="https://youtube.com/allday.nyc" target="_blank" rel="noopener">
+        YouTube <span class="arrow">↗</span>
+      </a>
+      <a class="link-item" href="https://tiktok.com/@alldaynyc" target="_blank" rel="noopener">
+        TikTok <span class="arrow">↗</span>
+      </a>
+      <a class="link-item" href="https://twitch.tv/alldaynyc" target="_blank" rel="noopener">
+        Twitch <span class="arrow">↗</span>
+      </a>
+      <a class="link-item" href="https://link.fourthwall.com/alldaynyc" target="_blank" rel="noopener">
+        Shop <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <p class="contact">Contact — <a href="mailto:Dan@allday.nyc">Dan@allday.nyc</a></p>
+  </div>
+</body>
+</html>
