@@ -31,7 +31,7 @@
     .bg {
       position: fixed;
       inset: 0;
-      background: url('IMG_4956.jpeg') center center / cover no-repeat;
+      background: url('IMG_5869_2.jpg') center center / cover no-repeat;
       z-index: 0;
     }
 
@@ -316,27 +316,20 @@
 
   <script>
     async function checkTwitchLive() {
-      const username = 'alldaynyc';
       try {
-        const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://decapi.me/twitch/uptime/' + username);
-        const res = await fetch(url);
+        const res = await fetch('/.netlify/functions/twitch-live');
         const data = await res.json();
-        const contents = (data.contents || '').trim();
-        if (contents && !contents.toLowerCase().includes('offline') && !contents.toLowerCase().includes('error')) {
+        if (data.live) {
           document.getElementById('liveBanner').style.display = 'block';
-          try {
-            const titleUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://decapi.me/twitch/title/' + username);
-            const titleRes = await fetch(titleUrl);
-            const titleData = await titleRes.json();
-            if (titleData.contents) {
-              document.getElementById('liveGame').textContent = titleData.contents.trim();
-            }
-          } catch(e) {}
+          document.getElementById('liveGame').textContent = data.title || '';
+        } else {
+          document.getElementById('liveBanner').style.display = 'none';
         }
       } catch (e) {
-        console.log('Twitch check failed:', e);
+        console.log('Live check failed:', e);
       }
     }
+
     checkTwitchLive();
     setInterval(checkTwitchLive, 180000);
   </script>
