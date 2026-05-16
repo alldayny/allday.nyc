@@ -52,6 +52,69 @@
       z-index: 1;
     }
 
+    .live-banner {
+      display: none;
+      width: 100%;
+      margin-bottom: 16px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .live-banner a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 20px;
+      background: #6441a5;
+      text-decoration: none;
+      color: var(--white);
+      border: 1.5px solid #7d5bbe;
+    }
+
+    .live-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff4040;
+      animation: pulse 1.4s ease infinite;
+      flex-shrink: 0;
+    }
+
+    .live-text {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .live-game {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      opacity: 0.75;
+      margin-top: 2px;
+      font-family: Arial, sans-serif;
+    }
+
+    .live-watch {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
     .logo {
       width: 160px;
       height: 160px;
@@ -175,6 +238,19 @@
 
   <div class="container">
 
+    <div class="live-banner" id="liveBanner">
+      <a href="https://twitch.tv/alldaynyc" target="_blank" rel="noopener">
+        <span class="live-left">
+          <span class="live-dot"></span>
+          <span>
+            <div class="live-text">Live Now on Twitch</div>
+            <div class="live-game" id="liveGame"></div>
+          </span>
+        </span>
+        <span class="live-watch">Watch →</span>
+      </a>
+    </div>
+
     <img class="logo" src="IMG_5189.PNG" alt="ALLDAYNYC Logo" />
 
     <div class="links">
@@ -237,5 +313,33 @@
     </div>
 
   </div>
+
+  <script>
+    async function checkTwitchLive() {
+      const username = 'alldaynyc';
+      try {
+        const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://decapi.me/twitch/uptime/' + username);
+        const res = await fetch(url);
+        const data = await res.json();
+        const contents = (data.contents || '').trim();
+        if (contents && !contents.toLowerCase().includes('offline') && !contents.toLowerCase().includes('error')) {
+          document.getElementById('liveBanner').style.display = 'block';
+          try {
+            const titleUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://decapi.me/twitch/title/' + username);
+            const titleRes = await fetch(titleUrl);
+            const titleData = await titleRes.json();
+            if (titleData.contents) {
+              document.getElementById('liveGame').textContent = titleData.contents.trim();
+            }
+          } catch(e) {}
+        }
+      } catch (e) {
+        console.log('Twitch check failed:', e);
+      }
+    }
+    checkTwitchLive();
+    setInterval(checkTwitchLive, 180000);
+  </script>
+
 </body>
 </html>
