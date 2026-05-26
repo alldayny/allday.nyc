@@ -229,6 +229,95 @@
 
     .contact-link:hover { color: var(--red); }
 
+    .gallery-section { display: none; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .modal-close:hover { opacity: 1; }
+
+    .gallery-title {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 12px;
+    }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+
+    .gallery-item {
+      flex-shrink: 0;
+      width: 200px;
+    }
+
+    .gallery-item img {
+      width: 200px;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      padding: 8px 0;
+      background: rgba(0,0,0,0.6);
+      color: var(--white);
+      text-align: center;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -317,6 +406,37 @@
         <span class="arrow">↗</span>
       </a>
 
+      <button class="link-item" onclick="document.getElementById('photosModal').style.display='flex'">
+        <span class="link-left">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <span class="label">Photos</span>
+        </span>
+        <span class="arrow">→</span>
+      </button>
+
+    </div>
+
+    <!-- Photos Modal -->
+    <div class="modal-overlay" id="photosModal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="document.getElementById('photosModal').style.display='none'">✕</button>
+        <p class="gallery-title">PHOTOS</p>
+        <div class="gallery-scroll">
+
+          <div class="gallery-item">
+            <img src="IMG_6830.jpg" alt="Radio City" />
+            <a class="download-btn" href="IMG_6830.jpg" download="ALLDAYNYC_RadioCity.jpg">↓ Download</a>
+          </div>
+
+          <div class="gallery-item">
+            <img src="IMG_6843.JPG" alt="Knicks ECF" />
+            <a class="download-btn" href="IMG_6843.JPG" download="ALLDAYNYC_KnicksECF.jpg">↓ Download</a>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <div class="contact-row">
